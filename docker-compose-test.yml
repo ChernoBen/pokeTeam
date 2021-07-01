@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+    api:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./server
+        volumes: 
+            - /app/node_modules
+            - ./server:/app
+        environment:
+            - ME_CONFIG_MONGODB_PORT=27017
+            - MONGO_INITDB_DATABASE=vehicle
+            - SECRET=PasteYourSecretEnvVarHere
+            - HOST=mongo
+        depends_on: 
+            - mongo
+        ports:
+            - '3000:3000'    
+    mongo:
+        image: mongo
+        environment:
+            - ME_CONFIG_MONGODB_PORT=27017
+            - MONGO_INITDB_DATABASE=vehicle
+        ports:
+            - '27017:27017'
