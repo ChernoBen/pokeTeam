@@ -52,7 +52,6 @@ describe("User test suite", () => {
         return request.post("/auth")
             .send({email:mainUser.email,password:mainUser.password})
             .then(res=>{
-                console.log(res.body);
                 authToken = res.body.token;
                 expect(res.statusCode).toEqual(200);
 				return request.get("/populate")
