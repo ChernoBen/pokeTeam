@@ -9,7 +9,10 @@ router.use((req,res,next)=>{
 
 router.post("/user",UserController.create);
 router.post("/auth",UserController.auth);
+//team
 router.post("/team",TeamController.create);
+router.put("/team",TeamController.update);
+//populate script
 router.get("/populate",PokeToolController.populate);
 
 module.exports = router;
