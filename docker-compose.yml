@@ -9,7 +9,7 @@ services:
             - ./server:/app
         environment:
             - ME_CONFIG_MONGODB_PORT=27017
-            - MONGO_INITDB_DATABASE=vehicle
+            - MONGO_INITDB_DATABASE=team    
             - SECRET=PasteYourSecretEnvVarHere
             - HOST=mongo
         depends_on: 
@@ -20,6 +20,6 @@ services:
         image: mongo
         environment:
             - ME_CONFIG_MONGODB_PORT=27017
-            - MONGO_INITDB_DATABASE=vehicle
+            - MONGO_INITDB_DATABASE=team
         ports:
             - '27017:27017'
