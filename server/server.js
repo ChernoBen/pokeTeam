@@ -4,7 +4,7 @@ const routes = require("./src/app");
 const keys = require("./keys");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
-const swaggerUi = require("./swagger_output.json");
+const swaggerFile = require("./swagger_output.json");
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
