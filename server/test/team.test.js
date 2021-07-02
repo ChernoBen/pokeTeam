@@ -28,6 +28,17 @@ let mainTeam = {
         "squirtle",
     ]
 };
+let pokeChange={
+    id:"",
+    pokemons:[
+        "ivysaur",
+        "charmander",
+    ],
+    newPokemons:[
+        "beedrill",
+        "pidgey",
+    ]  
+};
 beforeAll(() => {
     return request.post("/user")
         .send(mainUser)
@@ -46,8 +57,21 @@ describe("Pokemon test suite",()=>{
             .set({authorization:authToken})
             .send(mainTeam)
             .then(res=>{
-                console.log(res.body);
+                pokeChange.id = res.body["_id"];
                 expect(res.statusCode).toEqual(201);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+
+    test("Should update a team",()=>{
+        return request.put("/team")
+            .set({authorization:authToken})
+            .send(pokeChange)
+            .then(res=>{
+                console.log(res.body);
+                expect(res.statusCode).toEqual(200);
             })
             .catch(error=>{
                 fail(error);
