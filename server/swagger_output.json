@@ -9,8 +9,17 @@
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
+  "securityDefinitions": {
+    "Bearer": {
+      "name": "Authorization",
+      "in": "headers",
+      "type": "apiKey",
+      "description": "authorization token"
+    }
+  },
   "consumes": [],
   "produces": [],
   "paths": {
@@ -81,6 +90,11 @@
     },
     "/team": {
       "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "tags": [],
         "description": "",
         "parameters": [
@@ -112,7 +126,30 @@
           }
         }
       },
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
       "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "tags": [],
         "description": "",
         "parameters": [
@@ -126,6 +163,9 @@
                   "example": "any"
                 },
                 "newPokemons": {
+                  "example": "any"
+                },
+                "id": {
                   "example": "any"
                 }
               }
@@ -141,6 +181,39 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/team/{id}": {
+      "security": [
+        {
+          "Bearer": []
+        }
+      ],
+      "delete": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
