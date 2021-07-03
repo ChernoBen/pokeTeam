@@ -50,9 +50,13 @@ beforeAll(() => {
                 });
         });
 });
+afterAll(()=>{
+    return request.delete(`/team/${pokeChange.id}`)
+    .set({authorization:authToken});
+});
 
 describe("Pokemon test suite",()=>{
-    test("Should register a new pokemon",()=>{
+    test("Should register a new team",()=>{
         return request.post("/team")
             .set({authorization:authToken})
             .send(mainTeam)
@@ -70,7 +74,6 @@ describe("Pokemon test suite",()=>{
             .set({authorization:authToken})
             .send(pokeChange)
             .then(res=>{
-                console.log(res.body);
                 expect(res.statusCode).toEqual(200);
             })
             .catch(error=>{
