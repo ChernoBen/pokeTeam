@@ -52,7 +52,7 @@ beforeAll(() => {
 });
 
 describe("Pokemon test suite",()=>{
-    test("Should register a new pokemon",()=>{
+    test("Should register a new team",()=>{
         return request.post("/team")
             .set({authorization:authToken})
             .send(mainTeam)
@@ -70,8 +70,19 @@ describe("Pokemon test suite",()=>{
             .set({authorization:authToken})
             .send(pokeChange)
             .then(res=>{
-                console.log(res.body);
                 expect(res.statusCode).toEqual(200);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+    
+    test("Should delete a team",()=>{
+        return request.delete("/team")
+            .set({authorization:authToken})
+            .query({id:pokeChange.id})
+            .then(res=>{
+                expect(res.statusCode).toEqual(202);
             })
             .catch(error=>{
                 fail(error);
