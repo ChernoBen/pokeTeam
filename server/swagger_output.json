@@ -9,8 +9,7 @@
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "securityDefinitions": {
     "Bearer": {
@@ -186,26 +185,26 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/team/{id}": {
-      "security": [
-        {
-          "Bearer": []
-        }
-      ],
+      },
       "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "tags": [],
         "description": "",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "type": "string"
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "400": {
             "description": "Bad Request"
           },
