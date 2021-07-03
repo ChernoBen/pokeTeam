@@ -13,7 +13,7 @@ router.post("/auth",UserController.auth);
 router.post("/team",TeamController.create);
 router.get("/team",TeamController.get);
 router.put("/team",TeamController.update);
-router.delete("/team/:id",TeamController.delete);
+router.delete("/team",TeamController.delete);
 //populate script
 router.get("/populate",PokeToolController.populate);
 
