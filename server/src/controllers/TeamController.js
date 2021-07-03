@@ -4,6 +4,7 @@ const secret = keys.secret;
 const Team = require("../models/Team");
 const Pokemon = require("../models/Pokemon");
 const data = require("../utils/dataset");
+const { ObjectId } = require('mongodb');
 
 class TeamController{
 
@@ -28,6 +29,16 @@ class TeamController{
         let ids = pokeId.map(item=>{
             return item._id;
         });
+        //try{
+        //    let isValid = await Team.findOne({userId:ObjectId(decoded.id)})
+        //    if(isValid.pokemons){
+        //        return res.status(400).json({
+        //            message:"User alredy have a team registered"
+        //        })
+        //    }
+        //}catch(error){
+        //    return res.status(500).json({message:"Error while verifying team."})
+        //}
         try{
             let register = Team({userId:decoded.id,pokemons:ids});
             await register.save();
@@ -66,10 +77,54 @@ class TeamController{
             { pokemons:data },
             { new: true },
             async (err, team) => {
-                if (err) return res.status(500);
+                if (err) return res.status(500).json({message:"Internal Error!"});
                 let result = await Pokemon.find({_id:{$in:data}});
                 return res.status(200).json(result);
             });
     }
+
+    async get(req,res) {
+        if (!req.headers["authorization"]) return res.status(401).json({ message: "Unauthorized ." });
+        let token = req.headers["authorization"];
+        token = token.split(" ");
+        let decoded = jwt.verify(token[1], secret);
+        if(!decoded.id)return res.status(401).json({message:"Unauthorized"});
+        let result = await Team.findOne({userId:decoded.id});
+        if(!result)result = []; 
+        return res.status(200).json(result);
+	}
+
+    async delete(req, res) {
+        console.log(req.params.id)
+		if (!req.headers["authorization"]) return res.status(401);
+		const token = req.headers["authorization"];
+		if (req.params.id) {
+			const id = req.params.id;
+			if (token) {
+				const bearer = token.split(" ");
+				const tk = bearer[1];
+				const decoded = jwt.verify(tk, secret);
+                console.log(decoded)
+				const result = await Team.findOne({userId: decoded.id});
+                console.log(result);
+				if (result && result._id == id) {
+                    console.log(id);
+                    let deleted = await Team.deleteOne({_id:ObjectId(id)}); 
+                    console.log(deleted)  
+                    if(deleted.ok){
+                        return res.sendStatus(204);
+                    }else{
+                        return res.status(500);
+                    }
+                } else {
+					return res.status(404);
+				}
+			} else {
+				return res.status(401);
+			}
+		} else {
+			return res.status(400);
+		}
+	}
 };
 module.exports = new TeamController();
