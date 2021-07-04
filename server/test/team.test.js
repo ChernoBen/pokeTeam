@@ -88,4 +88,72 @@ describe("Pokemon test suite",()=>{
                 fail(error);
             });
     });
+    
+    
+});
+
+describe("PokeTeam wrong entrys test suite",()=>{
+    test("Should prevent empty entry",()=>{
+        return request.post("/team")
+            .set({authorization:authToken})
+            .send({pokemons:""})
+            .then(res=>{
+                expect(res.statusCode).toEqual(400);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+    
+    test("Should prevent wrong pokemon names entry",()=>{
+        return request.post("/team")
+            .set({authorization:authToken})
+            .send({pokemons:[
+                `1-${Date.now()}`,
+                `2-${Date.now()}`,
+                `3-${Date.now()}`,
+                `4-${Date.now()}`,
+                `5-${Date.now()}`,
+                `6-${Date.now()}`
+            ]})
+            .then(res=>{
+                expect(res.statusCode).toEqual(404);
+            })
+            .catch(error=>{
+                fail(error);
+            });
+    });
+
+    test("Should prevent user delete another user team",()=>{
+        mainUser.email = `another${Date.now()}@gmail.com`;
+        mainUser.password = `${Date.now()}`;
+        mainUser.name = `anotherName-${Date.now()}`
+        return request.post("/user")
+        .send(mainUser)
+        .then(res => {
+            expect(res.statusCode).toEqual(201);
+            return request.post("/auth")
+                .send({ email: mainUser.email, password: mainUser.password })
+                .then(res => {
+                    expect(res.statusCode).toEqual(200);
+                    authToken = res.body.token;
+                    return request.delete("/team")
+                        .set({authorization:authToken})
+                        .query({id:pokeChange.id})
+                        .then(res=>{
+                            expect(res.statusCode).toEqual(404);
+                        })
+                        .catch(error=>{
+                            fail(error);
+                        });
+
+                })
+                .catch(error=>{
+                    fail(error);
+                });
+        })
+        .catch(error=>{
+            fail(error);
+        });
+    });
 });
