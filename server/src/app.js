@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController = require("./controllers/UserController");
 const TeamController = require("./controllers/TeamController");
 const PokeToolController = require("./controllers/Populate");
+
 router.use((req,res,next)=>{
     next();
 });
