@@ -54,13 +54,6 @@ describe("User test suite", () => {
             .then(res=>{
                 authToken = res.body.token;
                 expect(res.statusCode).toEqual(200);
-				return request.get("/populate")
-					.then(res=>{
-						expect(res.statusCode).toEqual(200);
-					})
-					.catch(error=>{
-						fail(error);
-					});
             })
             .catch(error=>{
                 fail(error);
