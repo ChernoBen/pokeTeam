@@ -1,5 +1,4 @@
 const mongoose = require("../database");
-const axios = require("axios");
 const keys = require("../../keys");
 
 const PokemonSchema = new mongoose.Schema({

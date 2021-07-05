@@ -15,16 +15,14 @@ class TeamController{
         const decoded = jwt.verify(token[1], secret);
         if (!decoded.id) return res.status(401).json({ message: "Unauthorized ." });
         if(!req.body.pokemons)return res.status(400).json({message:"Pokemon field can not be blank!"});
-        if(req.body.pokemons.length>6 || req.body.pokemons.length<6)return res.status(400).json({message:"Pokemons must be 6!"});
-        req.body.pokemons.map(async poke =>{
-            try{
-                let result = await Pokemon.findOne({name:poke});
-                if(!result)return res.status(404).json({message:`Could not find ${poke}`})
-            }catch(error){
-                return res.status(500).json({message:`Error while trying to verify actual pokemons`});
-            }
-        });
-        const pokeId = await Pokemon.find({name:req.body.pokemons}).select("_id");
+        if(req.body.pokemons.length!=6)return res.status(400).json({message:"Pokemons must be 6!"});
+        let result = "";
+        let pokeArr = req.body.pokemons;
+        for (var i=0;i<6;i++){
+            result = await Pokemon.findOne({name:pokeArr[i]});
+            if(!result)return res.status(404).json({message:`Could not find ${pokeArr[i]}`});
+        }
+        const pokeId = await Pokemon.find({name:{$in:req.body.pokemons}}).select("_id");
         const ids = pokeId.map(item=>{
             return item._id;
         });
@@ -83,14 +81,18 @@ class TeamController{
         let token = req.headers["authorization"];
         token = token.split(" ");
         const decoded = jwt.verify(token[1], secret);
+        if(!decoded)return res.status(403).json({message:"Unauthorized"})
         if(!decoded.id)return res.status(401).json({message:"Unauthorized"});
-        let result = await Team.findOne({userId:decoded.id});
-        if(result == null){ 
+        const isUser = await User.findOne({_id:ObjectId(decoded.id)});
+        if(!isUser)return res.status(403).json({message:"Unauthorized"});
+        let result = await Team.findOne({userId:ObjectId(decoded.id)});
+        if(result == null || result == undefined || result == ""){ 
             return res.status(200).json({pokemons:[""]});
         }
         const {pokemons,userId} = result;
-        const team = await Pokemon.find({_id:{$in:pokemons}}).select("name");
-        const user = await User.findOne({_id:ObjectId(userId)}).select("name"); 
+        const team = await Pokemon.find({_id:{$in:pokemons}});
+        const user = await User.findOne({_id:ObjectId(userId)});
+        console.log({_id:result._id,user:user.name,team})
         return res.status(200).json({_id:result._id,user:user.name,team});
 	}
 
@@ -103,8 +105,8 @@ class TeamController{
 				const bearer = token.split(" ");
 				const tk = bearer[1];
 				const decoded = jwt.verify(tk, secret);
-				const result = await Team.findOne({userId: decoded.id});
-                if(!result.pokemons){
+				const result = await Team.findOne({_id:ObjectId(id),userId: ObjectId(decoded.id)});
+                if(!result){
                     return res.status(404).json({message:"Team not found!"});
                 }
                 await Team.deleteOne({_id:ObjectId(id)})
