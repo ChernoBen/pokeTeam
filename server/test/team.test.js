@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const router = require("../src/app");
 const supertest = require("supertest");
-const url = require("../keys");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
