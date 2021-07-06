@@ -10,7 +10,7 @@ module.exports = {
 //    apiPort:"3000",
 //    secret:"jhkshdkjsdkjh",
 //    mgHost: "localhost",
-//    mgDatabase: "test",
+//    mgDatabase: "team",
 //    mgPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD,
 //   	mgPort: "27017"
 //};
