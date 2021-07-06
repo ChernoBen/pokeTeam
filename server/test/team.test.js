@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(router);
 
 const request = supertest(app.listen(3003, () => {
-	console.log("User tests...");
+	console.log("Team tests...");
 }));
 
 let mainUser = {
@@ -24,7 +24,7 @@ let mainTeam = {
         "charmander",
         "charizard",
         "wartortle",
-        "squirtle",
+        "squirtle"
     ]
 };
 let pokeChange={
@@ -50,7 +50,7 @@ beforeAll(() => {
         });
 });
 
-describe("Pokemon test suite",()=>{
+describe("PokeTeam test suite",()=>{
     test("Should register a new team",()=>{
         return request.post("/team")
             .set({authorization:authToken})
