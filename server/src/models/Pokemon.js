@@ -1,5 +1,4 @@
 const mongoose = require("../database");
-const keys = require("../../keys");
 
 const PokemonSchema = new mongoose.Schema({
 	name:{
@@ -7,10 +6,7 @@ const PokemonSchema = new mongoose.Schema({
 		required:true,
 		unique:true
 	},
-	ref:{
-		type:String,
-		required:true
-	}
+	attributes:[]
 });
 const Pokemon = mongoose.model("Pokemon", PokemonSchema);
 module.exports = Pokemon;

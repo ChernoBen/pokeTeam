@@ -5,6 +5,7 @@ const keys = require("./keys");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger_output.json");
+const axios = require("axios");
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -19,6 +20,12 @@ const options = {
 app.use("/doc",swaggerUi.serve,swaggerUi.setup(swaggerFile,options));
 app.use(routes);
 
-app.listen(3000,()=>{
+app.listen(3000,async ()=>{
+    const worker = await axios.get("http://localhost:5000/worker");
+    if(worker.data["local-count"] == worker.data["web-count"]){
+        console.log("Data base is updated");
+    }else{
+        console.log(`Pokemons on database:${worker.data["local-count"]}\n Pokemons on web:${worker.data["web-count"]}`);
+    }
     console.log("Server running...");
 });

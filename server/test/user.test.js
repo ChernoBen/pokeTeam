@@ -2,14 +2,15 @@ const express = require("express");
 const app = express();
 const router = require("../src/app");
 const supertest = require("supertest");
-const { auth } = require("../src/controllers/UserController");
+const axios = require("axios");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
 
-const request = supertest(app.listen(3002, () => {
+const request = supertest(app.listen(3002,async () => {
 	console.log("User tests...");
+	const worker = await axios.get("http://localhost:5000/worker");
 }));
 
 let mainUser = {

@@ -4,7 +4,7 @@ const validator = require("email-validator");
 const keys = require("../../keys");
 const JWTSecret = keys.secret;
 const User = require("../models/User");
-
+const axios = require("axios");
 class UserController {
 
 	async create(req, res) {
