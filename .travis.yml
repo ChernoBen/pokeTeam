@@ -5,4 +5,8 @@ services:
 script:
   - docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test 
 after_success:
-  - deactivate
+  - docker build -t mfukushima/node-poketeam-container-server-project ./server
+  - docker build -t mfukushima/python-poketeam-container-worker-project ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push mfukushima/node-poketeam-container-server-project
+  - docker push mfukushima/python-poketeam-container-worker-project
