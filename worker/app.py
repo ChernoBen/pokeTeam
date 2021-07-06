@@ -7,6 +7,7 @@ import requests
 import json
 from pokeTypes import types
 import os
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -16,47 +17,60 @@ mongo = PyMongo(app)
 
 @app.route('/worker', methods=['GET'])
 def verify():
-    print("__init___$$$")
-    try:
-        pokeWeb = requests.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
-        webContent = json.loads(pokeWeb.content)
-        content = webContent
-        webContent = len(webContent["results"])
-        pokemon = mongo.db.pokemons
-        pokemonTypes = mongo.db.counters
-        results = pokemon.find()
-        newContent = ""
-        arr = []
-        arr2 = []
-        if (webContent-1) > results.count():
-            newContent = content["results"][results.count():]
-            for element in newContent:
-                res = requests.get(f"https://pokeapi.co/api/v2/pokemon/{element['name']}")
-                arr.append(json.loads(res.content))
-            for item in arr:
-                name = item["name"]
-                attributes = [att["type"]["name"] for att in item["types"]]
-                arr2.append(
+    pokemon = mongo.db.pokemons
+    pokemonTypes = mongo.db.counters
+    pokeSet = pd.read_csv("resources/dataSets/pokemons.csv")
+    sets = pokeSet[["name","attributes"]]
+    data = sets.to_dict("records")
+    print(len(data),pokemon.find().count())
+    if len(data) > pokemon.find().count():
+        try:
+            for instance in data:
+                pokemon.insert_one(
                     {
-                        "name":name,
-                        "attributes":attributes
+                        "name":instance["name"],
+                        "attributes":instance["attributes"]
                     }
                 )
-            for instance in arr2:
-                pokemon.insert_one({
-                "name":instance["name"],
-                "attributes":instance["attributes"]
-                })
             for tp in types:
-                print(tp)
-                pokemonTypes.insert_one(tp) 
-        return jsonify({
-            "web-count":webContent,
-            "local-count":results.count(),
-            "tipos":types
-            })
-    except:
-        return jsonify({message:"Connection not found"})
+                pokemonTypes.insert_one(tp)
+            return jsonify({"message":"ok"})
+        except:
+            pokeWeb = requests.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
+            webContent = json.loads(pokeWeb.content)
+            content = webContent
+            webContent = len(webContent["results"])
+            results = pokemon.find()
+            newContent = ""
+            arr = []
+            arr2 = []
+            if (webContent-1) > results.count():
+                newContent = content["results"][results.count():]
+                for element in newContent:
+                    res = requests.get(f"https://pokeapi.co/api/v2/pokemon/{element['name']}")
+                    arr.append(json.loads(res.content))
+                for item in arr:
+                    name = item["name"]
+                    attributes = [att["type"]["name"] for att in item["types"]]
+                    arr2.append(
+                        {
+                            "name":name,
+                            "attributes":attributes
+                        }
+                    )
+                for instance in arr2:
+                    pokemon.insert_one({
+                    "name":instance["name"],
+                    "attributes":instance["attributes"]
+                    })
+                for tp in types:
+                    pokemonTypes.insert_one(tp) 
+            return jsonify({
+                "web-count":webContent,
+                "local-count":results.count(),
+                "tipos":types
+                })
+    return jsonify({"message":"ok"})
 
 if __name__ == '__main__':
     print("running...")
