@@ -1,3 +1,5 @@
+**Travis Status**  
+<img align="left" alt="Travis status"  src="https://www.travis-ci.com/ChernoBen/pokeTeam.svg?token=c62HYvrR3yxRwZfGvY8o&branch=main" />
 # Bem vindo ao Projeto PokéAPI!
 
 A **PokeAPI** é uma **API** onde o usuário constrói um time contendo **obrigatoriamente 6** pokémons. O usúario precisa se cadastrar para poder montar seu time.  
@@ -11,17 +13,17 @@ A **PokeAPI** é uma **API** onde o usuário constrói um time contendo **obriga
 
 ## Tecnologias <a name="tec"></a>
 
+<img align="left" src="https://img.icons8.com/color/64/000000/nodejs.png"/>
 A **PokéApi** utiliza um server node Express para as principais funcionalidades como:
-<img src="https://img.icons8.com/color/64/000000/nodejs.png"/>
 - Cadastro e autenticação de usuário.
 - Criação, edição, listagem e deleção de time.
 
+<img align="left" src="https://img.icons8.com/color/48/000000/python--v1.png"/>
 Server python Flask como worker para:
-<img src="https://img.icons8.com/color/48/000000/python--v1.png"/>
 - Processar, tratar, e inserir pokemons e atributos na base de dados.
 
+<img align="left" src="https://img.icons8.com/color/48/000000/mongodb.png"/>
 Mongo DataBase  para e por : 
-<img src="https://img.icons8.com/color/48/000000/mongodb.png"/>
   - Armazenar todos os dados
   - Poder utilizar conceitos relacionais sem herdar os problemas de normalização clássicos. 
   Ex: um pokemon pode ter atributos e habilidades variadas. Sendo sua instancia:
@@ -30,13 +32,13 @@ Mongo DataBase  para e por :
 		   attibutes: ['grass', 'poison']
    }
 
+<img align="left" src="https://img.icons8.com/fluent/48/000000/docker.png"/>
 Docker para:
-<img src="https://img.icons8.com/fluent/48/000000/docker.png"/>
   - Conteinerização da aplicação facilitando a execução de testes de integração
 
+<img align="left" src="https://img.icons8.com/color/48/000000/travis-ci.png"/>
 TravisCI para:
-<img src="https://img.icons8.com/color/48/000000/travis-ci.png"/>
-  - Execução de testes contínuar de building e integration.
+  - Execução de testes de building e integration.
 ## Rotas <a name="about"></a>
 
 **POST**`/user`:
@@ -125,7 +127,9 @@ TravisCI para:
  - Clone este repositório
  - Siga até a raiz do projeto e execute o comando:
 	 >sudo docker-compose up --build
-- Para testar as rotas da aplicação no navegador, siga para endereço:
+ - Para testar as rotas da aplicação no navegador, siga para endereço:
 	>localhost:3000/doc
-
+ - Para executar a suite de tetes execute o comando:
+  > sudo docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test
+  
 **OBS:**  Após obter o token de autenticação, clique no cadiado, cole no campo **value** e click em authorize para poder utilizar todas as rotas que precisam de autenticação. 
