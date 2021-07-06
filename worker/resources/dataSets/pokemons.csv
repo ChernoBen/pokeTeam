@@ -1,0 +1,152 @@
+,name,attributes
+0,bulbasaur,"['grass', 'poison']"
+1,ivysaur,"['grass', 'poison']"
+2,venusaur,"['grass', 'poison']"
+3,charmander,['fire']
+4,charmeleon,['fire']
+5,charizard,"['fire', 'flying']"
+6,squirtle,['water']
+7,wartortle,['water']
+8,blastoise,['water']
+9,caterpie,['bug']
+10,metapod,['bug']
+11,butterfree,"['bug', 'flying']"
+12,weedle,"['bug', 'poison']"
+13,kakuna,"['bug', 'poison']"
+14,beedrill,"['bug', 'poison']"
+15,pidgey,"['normal', 'flying']"
+16,pidgeotto,"['normal', 'flying']"
+17,pidgeot,"['normal', 'flying']"
+18,rattata,['normal']
+19,raticate,['normal']
+20,spearow,"['normal', 'flying']"
+21,fearow,"['normal', 'flying']"
+22,ekans,['poison']
+23,arbok,['poison']
+24,pikachu,['electric']
+25,raichu,['electric']
+26,sandshrew,['ground']
+27,sandslash,['ground']
+28,nidoran-f,['poison']
+29,nidorina,['poison']
+30,nidoqueen,"['poison', 'ground']"
+31,nidoran-m,['poison']
+32,nidorino,['poison']
+33,nidoking,"['poison', 'ground']"
+34,clefairy,['fairy']
+35,clefable,['fairy']
+36,vulpix,['fire']
+37,ninetales,['fire']
+38,jigglypuff,"['normal', 'fairy']"
+39,wigglytuff,"['normal', 'fairy']"
+40,zubat,"['poison', 'flying']"
+41,golbat,"['poison', 'flying']"
+42,oddish,"['grass', 'poison']"
+43,gloom,"['grass', 'poison']"
+44,vileplume,"['grass', 'poison']"
+45,paras,"['bug', 'grass']"
+46,parasect,"['bug', 'grass']"
+47,venonat,"['bug', 'poison']"
+48,venomoth,"['bug', 'poison']"
+49,diglett,['ground']
+50,dugtrio,['ground']
+51,meowth,['normal']
+52,persian,['normal']
+53,psyduck,['water']
+54,golduck,['water']
+55,mankey,['fighting']
+56,primeape,['fighting']
+57,growlithe,['fire']
+58,arcanine,['fire']
+59,poliwag,['water']
+60,poliwhirl,['water']
+61,poliwrath,"['water', 'fighting']"
+62,abra,['psychic']
+63,kadabra,['psychic']
+64,alakazam,['psychic']
+65,machop,['fighting']
+66,machoke,['fighting']
+67,machamp,['fighting']
+68,bellsprout,"['grass', 'poison']"
+69,weepinbell,"['grass', 'poison']"
+70,victreebel,"['grass', 'poison']"
+71,tentacool,"['water', 'poison']"
+72,tentacruel,"['water', 'poison']"
+73,geodude,"['rock', 'ground']"
+74,graveler,"['rock', 'ground']"
+75,golem,"['rock', 'ground']"
+76,ponyta,['fire']
+77,rapidash,['fire']
+78,slowpoke,"['water', 'psychic']"
+79,slowbro,"['water', 'psychic']"
+80,magnemite,"['electric', 'steel']"
+81,magneton,"['electric', 'steel']"
+82,farfetchd,"['normal', 'flying']"
+83,doduo,"['normal', 'flying']"
+84,dodrio,"['normal', 'flying']"
+85,seel,['water']
+86,dewgong,"['water', 'ice']"
+87,grimer,['poison']
+88,muk,['poison']
+89,shellder,['water']
+90,cloyster,"['water', 'ice']"
+91,gastly,"['ghost', 'poison']"
+92,haunter,"['ghost', 'poison']"
+93,gengar,"['ghost', 'poison']"
+94,onix,"['rock', 'ground']"
+95,drowzee,['psychic']
+96,hypno,['psychic']
+97,krabby,['water']
+98,kingler,['water']
+99,voltorb,['electric']
+100,electrode,['electric']
+101,exeggcute,"['grass', 'psychic']"
+102,exeggutor,"['grass', 'psychic']"
+103,cubone,['ground']
+104,marowak,['ground']
+105,hitmonlee,['fighting']
+106,hitmonchan,['fighting']
+107,lickitung,['normal']
+108,koffing,['poison']
+109,weezing,['poison']
+110,rhyhorn,"['ground', 'rock']"
+111,rhydon,"['ground', 'rock']"
+112,chansey,['normal']
+113,tangela,['grass']
+114,kangaskhan,['normal']
+115,horsea,['water']
+116,seadra,['water']
+117,goldeen,['water']
+118,seaking,['water']
+119,staryu,['water']
+120,starmie,"['water', 'psychic']"
+121,mr-mime,"['psychic', 'fairy']"
+122,scyther,"['bug', 'flying']"
+123,jynx,"['ice', 'psychic']"
+124,electabuzz,['electric']
+125,magmar,['fire']
+126,pinsir,['bug']
+127,tauros,['normal']
+128,magikarp,['water']
+129,gyarados,"['water', 'flying']"
+130,lapras,"['water', 'ice']"
+131,ditto,['normal']
+132,eevee,['normal']
+133,vaporeon,['water']
+134,jolteon,['electric']
+135,flareon,['fire']
+136,porygon,['normal']
+137,omanyte,"['rock', 'water']"
+138,omastar,"['rock', 'water']"
+139,kabuto,"['rock', 'water']"
+140,kabutops,"['rock', 'water']"
+141,aerodactyl,"['rock', 'flying']"
+142,snorlax,['normal']
+143,articuno,"['ice', 'flying']"
+144,zapdos,"['electric', 'flying']"
+145,moltres,"['fire', 'flying']"
+146,dratini,['dragon']
+147,dragonair,['dragon']
+148,dragonite,"['dragon', 'flying']"
+149,mewtwo,['psychic']
+150,mew,['psychic']
