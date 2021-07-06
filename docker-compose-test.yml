@@ -9,17 +9,31 @@ services:
             - ./server:/app
         environment:
             - ME_CONFIG_MONGODB_PORT=27017
-            - MONGO_INITDB_DATABASE=vehicle
+            - MONGO_INITDB_DATABASE=team    
             - SECRET=PasteYourSecretEnvVarHere
             - HOST=mongo
         depends_on: 
             - mongo
+            - worker
         ports:
-            - '3000:3000'    
+            - '3000:3000'
+    worker:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./worker
+        volumes: 
+            - /__pycache__
+            - ./worker:/app
+        environment:
+            - DB_URL=mongodb://mongo:27017/team
+        depends_on: 
+            - mongo
+        ports:
+            - '5000:5000' 
     mongo:
         image: mongo
         environment:
             - ME_CONFIG_MONGODB_PORT=27017
-            - MONGO_INITDB_DATABASE=vehicle
+            - MONGO_INITDB_DATABASE=team
         ports:
             - '27017:27017'
