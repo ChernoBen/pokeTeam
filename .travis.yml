@@ -3,7 +3,7 @@ sudo: required
 services:
   - docker
 script:
-  - docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test 
+  - sudo docker-compose up --build
 after_success:
   - docker build -t mfukushima/node-poketeam-container-server-project ./server
   - docker build -t mfukushima/python-poketeam-container-worker-project ./worker
