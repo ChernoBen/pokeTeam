@@ -4,7 +4,8 @@ const secret = keys.secret;
 const Team = require("../models/Team");
 const Pokemon = require("../models/Pokemon");
 const User = require("../models/User");
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
+const Counter = require("../models/Counter");
 
 class TeamController{
 
@@ -92,8 +93,38 @@ class TeamController{
         const {pokemons,userId} = result;
         const team = await Pokemon.find({_id:{$in:pokemons}});
         const user = await User.findOne({_id:ObjectId(userId)});
-        console.log({_id:result._id,user:user.name,team})
-        return res.status(200).json({_id:result._id,user:user.name,team});
+        let atrib = [];
+        team.map(item=>{
+            atrib.push(item.attributes);
+        });
+        let atribArr = []
+        atrib.map(element=>{
+            element.map(item=>{
+                atribArr.push(item)
+            })
+        })
+        let atribQuery= atribArr.filter((value, index) => atribArr.indexOf(value) === index);
+        let counters = await Counter.find({weakness:{$in:atribQuery}});
+        let counterResult = []
+        console.log(atrib)
+        counters.map(att=>{
+            counterResult.push(att.name);
+        });
+        let pokeCounter = []
+        let i = 0;
+        counterResult.map(item=>{
+            if(!atribQuery[atribQuery.indexOf(item)]){
+                pokeCounter.push(item) 
+            }
+            i+=1;
+        });
+        return res.status(200).json({
+            _id:result._id,
+            counterCount:pokeCounter.length,
+            user:user.name,
+            team,
+            counters:pokeCounter
+        });
 	}
 
     async delete(req, res) {
