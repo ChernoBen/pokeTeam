@@ -42,21 +42,9 @@ describe("Pokemon test suite",()=>{
             });
     });
 
-    test("Should get pokemons by passing attributes",()=>{
-        return request.get(`/pokemon?attributes=${attributes[0]},${attributes[1]}`)
-            .set({authorization:authToken})
-            .then(res=>{
-                expect(res.statusCode).toEqual(200);
-            })
-            .catch(error=>{
-                fail(error);
-            });
-    });
-
     test("Should not get pokemons by passing attributes",()=>{
         attributes[0]= "wrong";
-        attributes[1] = "wrongToo";
-        return request.get(`/pokemon?attributes=${attributes[0]},${attributes[1]}`)
+        return request.get(`/pokemon?attributes=${attributes[0]}`)
             .set({authorization:authToken})
             .then(res=>{
                 expect(res.statusCode).toEqual(404);
