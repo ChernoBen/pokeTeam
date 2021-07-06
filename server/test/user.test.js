@@ -7,26 +7,12 @@ const axios = require("axios");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
-setTimeout(()=>{console.log("Waiting for the worker start")},90000)
 const request = supertest(app.listen(3002,async () => {
 	console.log("User tests...");
 	try{
-        const worker = await axios.get("http://worker:5000/worker");
-        setTimeout(()=>{console.log("Waiting for the worker response")},90000)
-        if(worker){
-            if(!worker.message){
-                if(worker.data["local-count"] == worker.data["web-count"]){
-                    console.log("Data base is updated");
-                }else{
-                    console.log(`Pokemons on database:${worker.data["local-count"]}\n Pokemons on web:${worker.data["web-count"]}`);
-                }
-            }else{
-                console.log(worker.message);
-            }
-            
-        }      
+        const worker = await axios.get("http://worker:5000/worker");     
     }catch(error){
-        console.log("Error while pulling the worker trigger")
+        console.log("Connetcion error while pulling the worker trigger")
     }
 }));
 let mainUser = {
