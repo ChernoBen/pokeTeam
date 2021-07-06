@@ -19,9 +19,10 @@ class UserController {
 			if (user != undefined) { return res.status(400).json({ error: "Email already registered" }); }
 			const newUser = new User({ name, email, password: hash});
 			await newUser.save();
-			res.status(201).json( newUser);
+			delete newUser.password;
+			return res.status(201).json(newUser);
 		} catch (error) {
-			res.status(500);
+			return res.status(500).json({message:"Internal error"});
 		}
 	}
 
@@ -33,7 +34,7 @@ class UserController {
 		if (!isPasswordValid) return res.status(403).json({ errors: { password: "Wrong password" } });
 		jwt.sign({ email: email, name: user.name, id: user._id }, JWTSecret, { expiresIn: "6h" }, (error, token) => {
 			if (error) {
-				res.sendStatus(500);
+				return res.status(500).json({message:"Internal error"});
 			} else {
 				return res.json({ token: `Bearer ${token}` });
 			}
