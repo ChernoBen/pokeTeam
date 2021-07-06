@@ -15,21 +15,33 @@ class PokemonController{
         const decoded = jwt.verify(token[1], secret);
         if(!decoded)return res.status(401).json({message:"Unauthorized"})
         if(!decoded.id)return res.status(401).json({message:"Unauthorized"});
-        let query = {
-            _id:req.query._id,
-            attributes:req.query.attributes?req.query.attributes.split(","):undefined,
-            name:req.query.name
-        };
-        for (var [key,value] of Object.entries(query)) { if (!req.query[key]) { delete query[key]; } }
-        if(query == undefined){
-            let counts = await Pokemon.find().countDocuments();
-            let pokeData = await Pokemon.find();
-            return res.status(200).json({count:counts,data:pokeData}); 
-        }
-        let result = await Pokemon.find(query);
-        if(result.length == 0 || result == undefined || result == "" || result == null)return res.status(404).json({message:"Pokemon not found"});
-        let counter = await Pokemon.find(query).countDocuments();
-        return res.status(200).json({count:counter,data:result});
+        if(req.query){
+            if(req.query.attributes){
+                let att = []
+                att = att.concat(req.query.attributes.split(","));
+                const attPokemons = await Pokemon.find({attributes:{$in:att}});
+                if(attPokemons.length == 0) return res.status(404).json({message:"Not found"});
+                return res.status(200).json({count:attPokemons.length,data:attPokemons});
+            }else if(req.query._id){
+                const id = ObjectId(req.query._id);
+                const idPokemon = await Pokemon.findOne({_id:id});
+                if(!idPokemon)return res.status(404).json({message:"Not found"});
+                return res.status(200).json(idPokemon);
+            }else if(req.query.name){
+                const name = req.query.name;
+                const pokeName = await Pokemon.find({name:name});
+                if(!pokeName)return res.status(404).json({message:"Not found"});
+                return res.status(200).json(pokeName);
+            }else{
+                const resul = await Pokemon.find();
+                if(resul.length==0)return res.status(200).json([""]);
+                return res.status(200).json({count:resul.length,data:resul});
+            }
+        }else{
+            const result = await Pokemon.find();
+            if(result.length==0)return res.status(200).json([""]);
+            return res.status(200).json({count:result.length,data:result});
+        } 
     }
 }
 module.exports = new PokemonController();
