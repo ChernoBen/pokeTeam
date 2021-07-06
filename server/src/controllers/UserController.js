@@ -17,7 +17,7 @@ class UserController {
 		try {
 			const user = await User.findOne({ "email": email });
 			if (user != undefined) { return res.status(400).json({ error: "Email already registered" }); }
-			const newUser = new User({ name, email, password: hash});
+			let newUser = new User({ name, email, password: hash});
 			await newUser.save();
 			delete newUser.password;
 			return res.status(201).json(newUser);
