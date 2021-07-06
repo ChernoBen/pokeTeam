@@ -49,7 +49,7 @@ class TeamController{
         let {pokemons,newPokemons} = req.body;
         if(!pokemons || !newPokemons)return res.status(400).json({message:"Fields can not be blank!"});
         if(pokemons.length == 0 || pokemons.length >6 || newPokemons.length == 0 || newPokemons.length >6){
-            return res.status(400).json({message:"Invalid setup os pokemons"});
+            return res.status(400).json({message:"Invalid setup of pokemons"});
         }
         if(pokemons.length != newPokemons.length)return res.status(400).json({message:"Fields should have the same number of items"})
         let team = await Team.findOne({userId:ObjectId(decoded.id)}).select("pokemons");
