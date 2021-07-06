@@ -13,16 +13,24 @@ A **PokeAPI** é uma **API** onde o usuário constrói um time contendo **obriga
 
 ## Tecnologias <a name="tec"></a>
 
+
 <img align="left" src="https://img.icons8.com/color/64/000000/nodejs.png"/>
+
+
 A **PokéApi** utiliza um server node Express para as principais funcionalidades como:
 - Cadastro e autenticação de usuário.
 - Criação, edição, listagem e deleção de time.
 
+
 <img align="left" src="https://img.icons8.com/color/48/000000/python--v1.png"/>
+
+
 Server python Flask como worker para:
 - Processar, tratar, e inserir pokemons e atributos na base de dados.
 
 <img align="left" src="https://img.icons8.com/color/48/000000/mongodb.png"/>
+
+
 Mongo DataBase  para e por : 
   - Armazenar todos os dados
   - Poder utilizar conceitos relacionais sem herdar os problemas de normalização clássicos. 
@@ -32,13 +40,20 @@ Mongo DataBase  para e por :
 		   attibutes: ['grass', 'poison']
    }
 
+
 <img align="left" src="https://img.icons8.com/fluent/48/000000/docker.png"/>
+
+
 Docker para:
   - Conteinerização da aplicação facilitando a execução de testes de integração
 
+
 <img align="left" src="https://img.icons8.com/color/48/000000/travis-ci.png"/>
+
+
 TravisCI para:
   - Execução de testes de building e integration.
+
 ## Rotas <a name="about"></a>
 
 **POST**`/user`:
@@ -83,9 +98,9 @@ TravisCI para:
 		- 404 - Entrada de nomes inválidos de pokémons.
 
 
+## Tecnologias <a name="tec"></a>
 
-
-**G## Tecnologias <a name="tec"></a>ET** `/team`:
+**GET**`/team`:
 
 - Obter time criado pelo usuário e listagem de atributos de "counteram" a formação:
 	
@@ -131,5 +146,5 @@ TravisCI para:
 	>localhost:3000/doc
  - Para executar a suite de tetes execute o comando:
   > sudo docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test
-  
+
 **OBS:**  Após obter o token de autenticação, clique no cadiado, cole no campo **value** e click em authorize para poder utilizar todas as rotas que precisam de autenticação. 
