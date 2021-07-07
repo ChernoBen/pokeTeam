@@ -19,13 +19,11 @@ const options = {
 
 app.use("/doc",swaggerUi.serve,swaggerUi.setup(swaggerFile,options));
 app.use(routes);
-
 app.listen(3000,async ()=>{
-    const worker = await axios.get("http://localhost:5000/worker");
-    if(worker.data["local-count"] == worker.data["web-count"]){
-        console.log("Data base is updated");
-    }else{
-        console.log(`Pokemons on database:${worker.data["local-count"]}\n Pokemons on web:${worker.data["web-count"]}`);
+    try{
+        const worker = await axios.get("http://worker:5000/worker");     
+    }catch(error){
+        console.log("Connection error while pulling the worker trigger")
     }
     console.log("Server running...");
 });

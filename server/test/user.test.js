@@ -7,12 +7,14 @@ const axios = require("axios");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
-
 const request = supertest(app.listen(3002,async () => {
 	console.log("User tests...");
-	const worker = await axios.get("http://localhost:5000/worker");
+	try{
+        const worker = await axios.get("http://worker:5000/worker");     
+    }catch(error){
+        console.log("Connetcion error while pulling the worker trigger")
+    }
 }));
-
 let mainUser = {
     name:`Name-${Date.now()}`,
     email:`email${Date.now()}@gmail.com`,

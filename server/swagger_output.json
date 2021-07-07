@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
+    "title": "PokéTeam",
     "description": ""
   },
   "host": "localhost:3000",
@@ -24,7 +24,7 @@
   "paths": {
     "/user": {
       "post": {
-        "tags": [],
+        "tags": ["user"],
         "description": "",
         "parameters": [
           {
@@ -61,7 +61,7 @@
     },
     "/auth": {
       "post": {
-        "tags": [],
+        "tags": ["user"],
         "description": "",
         "parameters": [
           {
@@ -83,6 +83,51 @@
         "responses": {
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pokemon": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["pokemons"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "attributes",
+            "in": "query",
+            "type": "array",
+            "items":{
+              "type":"string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -94,7 +139,7 @@
             "Bearer": []
           }
         ],
-        "tags": [],
+        "tags": ["team"],
         "description": "",
         "parameters": [
           {
@@ -104,7 +149,15 @@
               "type": "object",
               "properties": {
                 "pokemons": {
-                  "example": "any"
+                  "example": [
+                    "bulbasaur",
+                    "venusaur",
+                    "charmander",
+                    "charmeleon",
+                    "charizard",
+                    "wartortle"
+
+                  ]
                 }
               }
             }
@@ -131,7 +184,7 @@
             "Bearer": []
           }
         ],
-        "tags": [],
+        "tags": ["team"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -152,7 +205,7 @@
             "Bearer": []
           }
         ],
-        "tags": [],
+        "tags": ["team"],
         "description": "",
         "parameters": [
           {
@@ -162,10 +215,24 @@
               "type": "object",
               "properties": {
                 "pokemons": {
-                  "example": "any"
+                  "example": [
+                    "bulbasaur",
+                    "venusaur",
+                    "charmander",
+                    "charmeleon",
+                    "charizard",
+                    "wartortle"
+                  ]
                 },
                 "newPokemons": {
-                  "example": "any"
+                  "example": [
+                    "mew",
+                    "mewtwo",
+                    "dragonite",
+                    "dragonair",
+                    "dratini",
+                    "moltres"
+                  ]
                 }
               }
             }
@@ -192,7 +259,7 @@
             "Bearer": []
           }
         ],
-        "tags": [],
+        "tags": ["team"],
         "description": "",
         "parameters": [
           {
@@ -210,51 +277,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/pokemon": {
-      "get": {
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "attributes",
-            "in": "query",
-            "type": "array",
-            "items":{
-              "type":"string"
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"

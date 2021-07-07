@@ -1,0 +1,6 @@
+language: generic
+sudo: required
+services:
+  - docker
+script:
+  - sudo docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test -- user.test
