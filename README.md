@@ -144,7 +144,7 @@ TravisCI para:
 	 >sudo docker-compose up --build
  - Para testar as rotas da aplicação no navegador, siga para endereço:
 	>localhost:3000/doc
- - Para executar a suite de tetes execute o comando:
+ - Para executar a suite de testes execute o comando:
     > sudo docker-compose -f docker-compose-test.yml -p tests run --rm api npm run test
 
 **OBS:**  Após obter o token de autenticação, clique no cadiado, cole no campo **value** e click em authorize para poder utilizar todas as rotas que precisam de autenticação. 
