@@ -6,11 +6,3 @@ module.exports = {
 	mgPort: process.env.ME_CONFIG_MONGODB_PORT,
 	url:"https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
 };
-//module.exports = {
-//    apiPort:"3000",
-//    secret:"jhkshdkjsdkjh",
-//    mgHost: "localhost",
-//    mgDatabase: "team",
-//    mgPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD,
-//   	mgPort: "27017"
-//};
