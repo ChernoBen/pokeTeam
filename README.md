@@ -4,7 +4,7 @@
 
 A **PokeAPI** é uma **API** onde o usuário constrói um time contendo **obrigatoriamente 6** pokémons. O usúario precisa se cadastrar para poder montar seu time.  
 
-#Índice:
+## Índice:
 - [Tenologias](#tec)
 - [Sobre as rotas](#about)
 - [Rodando](#start)
