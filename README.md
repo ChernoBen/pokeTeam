@@ -1,3 +1,5 @@
+**Travis Status**  
+<img align="left" alt="Travis status"  src="https://www.travis-ci.com/ChernoBen/pokeTeam.svg?token=c62HYvrR3yxRwZfGvY8o&branch=main" />
 # Bem vindo ao Projeto PokéAPI!
 
 A **PokeAPI** é uma **API** onde o usuário constrói um time contendo **obrigatoriamente 6** pokémons. O usúario precisa se cadastrar para poder montar seu time.  
